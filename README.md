@@ -53,6 +53,9 @@ To send a message to the WebSocket URL, perform a websocket request to the /webs
 # Deleting messages
 - Restful api using the DELETE request endpoint api/chat-room/messages/{id}
 
+# PostMan Collection
+- Refer to the doc folder in the root of the project
+
 
 
 
