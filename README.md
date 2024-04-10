@@ -29,8 +29,8 @@ Follow the steps below to install and run the WebSocket Chat Server:<br>
 # Configuration
 Ensure that the following properties are set in the application.properties file:<br>
 
-Basic Authentication Credentials
-spring.security.user.name=your-username
+Basic Authentication Credentials<br>
+spring.security.user.name=your-username<br>
 spring.security.user.password=your-password
 
 # Usage
