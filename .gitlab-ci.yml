@@ -1,0 +1,54 @@
+image: maven:latest
+
+stages:
+  - build-image
+  - test
+  - deploy-preprod
+  - release-ticket
+  - deploy-production
+
+build-job:
+  stage: build-image
+  script:
+    - echo "Building Chat Server Application"
+
+unit-tests:
+  stage: test
+  script:
+    - mvn test
+  only:
+    - merge_requests
+    - main
+
+sonar-scan:
+  stage: test
+  script:
+    - echo "Sonar Scan Checking Code Quality"
+  needs:
+    - unit-tests
+  only:
+    - merge_requests
+    - main
+
+load-tests:
+  stage: test
+  script:
+    - echo "How much load can the Chat server can hold"
+
+deploy-preprod:
+  stage: deploy-preprod
+  script:
+    - echo "Deploying to Pre Prod Environment"
+
+release-ticket:
+  stage: release-ticket
+  needs:
+    - deploy-preprod
+  script:
+    - echo "Create release ticket"
+
+deploy-prod:
+  stage: deploy-production
+  script:
+    - echo "Deploying to Production Environment"
+  when: manual
