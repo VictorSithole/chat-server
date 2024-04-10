@@ -1,6 +1,6 @@
 package com.chatserver.services;
 
-import com.chatserver.data.entities.ChatMessageStore;
+import com.chatserver.data.entities.ChatRoomMessageStore;
 import com.chatserver.services.impl.DefaultChatRoomServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,13 +25,13 @@ public class DefaultChatRoomHandler implements WebSocketHandler {
         String username = Objects.requireNonNull(session.getPrincipal()).getName();
         session.sendMessage(new TextMessage("You have successfully connected to the Server Chat Room: " + username.toUpperCase()));
 
-        List<ChatMessageStore> chatMessageStores = chatRoomService.getMessagesByUserName(username.toUpperCase());
+        List<ChatRoomMessageStore> chatRoomMessageStores = chatRoomService.getMessagesByUserName(username.toUpperCase());
 
-        if (chatMessageStores == null) {
+        if (chatRoomMessageStores == null) {
             session.sendMessage(new TextMessage("No messages found for user: " + username.toUpperCase()));
         } else {
-            for (ChatMessageStore chatMessageStore : chatMessageStores) {
-                session.sendMessage(new TextMessage(chatMessageStore.getMessage()));
+            for (ChatRoomMessageStore chatRoomMessageStore : chatRoomMessageStores) {
+                session.sendMessage(new TextMessage(chatRoomMessageStore.getMessage()));
             }
         }
         log.info("Connected to chat: {}", session.getId());

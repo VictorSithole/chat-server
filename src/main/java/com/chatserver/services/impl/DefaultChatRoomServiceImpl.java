@@ -1,9 +1,9 @@
 package com.chatserver.services.impl;
 
 import com.chatserver.data.RandomChatRoomIdGenerator;
-import com.chatserver.data.ChatMessageBuilder;
-import com.chatserver.data.entities.ChatMessageStore;
-import com.chatserver.data.repositories.ChatMessageStoreJAPRepository;
+import com.chatserver.data.ChatRoomMessageBuilder;
+import com.chatserver.data.entities.ChatRoomMessageStore;
+import com.chatserver.data.repositories.ChatRoomMessageStoreJAPRepository;
 import com.chatserver.services.DefaultChatRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.Objects;
 @Service
 public class DefaultChatRoomServiceImpl implements DefaultChatRoomService {
     @Autowired
-    ChatMessageStoreJAPRepository chatMessageStoreJAPRepository;
+    ChatRoomMessageStoreJAPRepository chatRoomMessageStoreJAPRepository;
     private final RandomChatRoomIdGenerator randomChatRoomIdGenerator;
 
     @Autowired
@@ -27,25 +27,25 @@ public class DefaultChatRoomServiceImpl implements DefaultChatRoomService {
 
     @Override
     public void sendMessage(String message, WebSocketSession session) {
-        ChatMessageStore message1 = new ChatMessageBuilder.Builder()
+        ChatRoomMessageStore message1 = new ChatRoomMessageBuilder.Builder()
                 .message(message)
                 .timestamp(LocalDateTime.now())
                 .userName(Objects.requireNonNull(session.getPrincipal()).getName())
                 .chatRoomId(randomChatRoomIdGenerator.getChatRoomId())
                 .build();
-        chatMessageStoreJAPRepository.save(message1);
+        chatRoomMessageStoreJAPRepository.save(message1);
 
     }
 
     @Override
-    public List<ChatMessageStore> getMessagesByUserName(String username) {
+    public List<ChatRoomMessageStore> getMessagesByUserName(String username) {
 
-        return chatMessageStoreJAPRepository.findByUsername(username);
+        return chatRoomMessageStoreJAPRepository.findByUsername(username);
     }
 
     @Override
-    public List<ChatMessageStore> getAllMessages() {
-        return chatMessageStoreJAPRepository.findAll();
+    public List<ChatRoomMessageStore> getAllMessages() {
+        return chatRoomMessageStoreJAPRepository.findAll();
     }
 
     @Override

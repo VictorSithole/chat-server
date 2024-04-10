@@ -1,11 +1,11 @@
 package com.chatserver.data;
 
-import com.chatserver.data.entities.ChatMessageStore;
+import com.chatserver.data.entities.ChatRoomMessageStore;
 
 import java.time.LocalDateTime;
 
-public class ChatMessageBuilder {
-    private ChatMessageBuilder() {}
+public class ChatRoomMessageBuilder {
+    private ChatRoomMessageBuilder() {}
     public static class Builder {
         private String message;
         private LocalDateTime timestamp;
@@ -38,14 +38,14 @@ public class ChatMessageBuilder {
             return this;
         }
 
-        public ChatMessageStore build() {
+        public ChatRoomMessageStore build() {
             if (message == null || message.isEmpty()) {
                 throw new IllegalStateException("Message must be set");
             }
             if (chatRoomId == null) {
                 throw new IllegalStateException("Chat room ID must be set");
             }
-            ChatMessageStore chatMessage = new ChatMessageStore();
+            ChatRoomMessageStore chatMessage = new ChatRoomMessageStore();
             chatMessage.setMessage(this.message);
             chatMessage.setTimestamp(this.timestamp);
             chatMessage.setChatRoomId(this.chatRoomId);
