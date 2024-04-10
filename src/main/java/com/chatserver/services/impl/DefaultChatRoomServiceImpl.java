@@ -50,6 +50,6 @@ public class DefaultChatRoomServiceImpl implements DefaultChatRoomService {
 
     @Override
     public void deleteMessage(Long id) {
-      //delete chat messages
+        chatRoomMessageStoreJAPRepository.deleteById(id);
     }
 }
