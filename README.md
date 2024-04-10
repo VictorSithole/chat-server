@@ -39,7 +39,12 @@ WebSocket Connection<br>
 2. Once the connection is established, the server will be ready to send and receive messages.
 
 # Sending Messages
-To send a message to the WebSocket URL, perform a websocket request to the /websocket endpoint:
+To send a message to the WebSocket URL, perform a websocket request to the /websocket endpoint:<br>
+
+- ws://localhost:8080/websocket<br>
+- Ensure you add the Basic Authorization headers before sending a request to connect to the websocket url.<br>
+- Now start sending messages as text and immediately server responses should be received 
+
 
 # Retrieving messages
 - Includes server response immediately after sending messages on the websocket url
